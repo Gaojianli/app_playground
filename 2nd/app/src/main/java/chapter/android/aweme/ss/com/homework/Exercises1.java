@@ -41,7 +41,7 @@ public class Exercises1 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exec1);
+        setContentView(R.layout.activity_exer1);
         mLifecycleDisplay = findViewById(R.id.tv_loglifecycle);
         globalVar= ((MainApplication) getApplication()).getGlobalVar();
         if (globalVar.get(TAG) == null) {
