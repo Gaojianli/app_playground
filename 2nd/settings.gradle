@@ -1,2 +1,1 @@
-include ':app'
-rootProject.name='tiktokMsg'
+include ':app', ':homework'

@@ -1,7 +1,15 @@
-# 第二次作业
-## 要求
+# Chapter2
+Android基础UI开发
 
-1. Logcat在屏幕旋转的时候 #onStop() #onDestroy()会展示出来，但UI界面我们看不到，在今天课程基础上想办法补全它，让其跟logcat的展示一样
-1. 一个抖音笔试题：统计页面所有view的个数     ViewGroup中的API ： getChildCount()   getChildAt()
-1. 实现一个类似抖音消息页面，如图 ,并且点击每个recycleview的item,能够跳转到一个新的界面，并且在新的页面显示出他是第几个item
-![抖音消息](requirements.jpg)
+* app:课堂代码
+* homework:课后作业
+* homework-debug.apk 是课后作业的示例，可以使用
+adb install -t homework-debug.apk 进行安装
+
+## UI的标注资源 请参考这里：
+
+https://app.zeplin.io/project/5c402caf0c6b0938570c4953/screen/5c402eaf5838d5bff1178c68
+
+* 账号：397717749@qq.com
+* 密码：123456
+
