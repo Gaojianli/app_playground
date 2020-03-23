@@ -28,18 +28,18 @@
         android:layout_height="match_parent"
         android:layout_above="@id/edit_send_content"
         android:layout_below="@id/header">
-
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/main_chat_content">
         <TextView
             android:padding="16dp"
             android:id="@+id/tv_content_info"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="casual"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:textStyle="normal"
             tools:text="skdjskdjskdjskdjskdjs" />
-
+        </LinearLayout>
     </ScrollView>
 
 
