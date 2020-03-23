@@ -1,25 +1,26 @@
 package me.gaojianli.tiktokmsg
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
-    private var msgList:MutableList<Msg> = ArrayList<Msg>()
+    private var msgList: MutableList<Msg> = ArrayList<Msg>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initData()
-        val recycleView=findViewById<RecyclerView>(R.id.recyle_view)
+        val recycleView = findViewById<RecyclerView>(R.id.recyle_view)
         recycleView.layoutManager = LinearLayoutManager(this)
-        recycleView.adapter=MsgAdapter(msgList)
+        recycleView.adapter = MsgAdapter(msgList)
     }
 
-    private fun initData(){
-        msgList.add(Msg("张三","你好，我是张三",R.mipmap.zhang3))
-        msgList.add(Msg("李四","你好，我是李四",R.mipmap.li4))
-        msgList.add(Msg("王二麻子","你好，我是王二麻子",R.mipmap.wang2mazi))
-        msgList.add(Msg("赵五","你好，我是赵五",R.mipmap.zhao5))
+    private fun initData() {
+        val nameList =
+            mapOf("张三" to R.mipmap.zhang3, "李四" to R.mipmap.li4, "王二麻子" to R.mipmap.wang2mazi, "赵五" to R.mipmap.zhao5)
+        for (item in nameList) {
+            msgList.add((Msg(item.key, "你好，我是${item.key}", item.value)))
+        }
     }
 }
