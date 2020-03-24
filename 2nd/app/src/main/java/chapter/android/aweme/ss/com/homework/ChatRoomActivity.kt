@@ -1,7 +1,7 @@
 package chapter.android.aweme.ss.com.homework
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Gravity
 import android.widget.EditText
 import android.widget.ImageView
@@ -22,7 +22,7 @@ class ChatRoomActivity : AppCompatActivity() {
         messageView.text = "Index of the message you clicked: ${index}"
         findViewById<TextView>(R.id.tv_with_name).text = name
         val sendButton: ImageView = findViewById(R.id.btn_send_info)
-        sendButton.setOnClickListener { v ->
+        sendButton.setOnClickListener { _ ->
             val msg = findViewById<EditText>(R.id.ed_say).text
             val contentView = findViewById<LinearLayout>(R.id.main_chat_content)
             val toAddMsg = TextView(this)
