@@ -47,7 +47,7 @@ public class CircleImageView extends AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         // 使用离屏缓存，新建一个srcRectF区域大小的图层
-        canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG);
+        canvas.saveLayer(null, null);
         // ImageView自身的绘制流程，即绘制图片
         super.onDraw(canvas);
         // 给path添加一个圆形
