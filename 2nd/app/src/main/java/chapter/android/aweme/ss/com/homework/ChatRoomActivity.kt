@@ -2,7 +2,7 @@ package chapter.android.aweme.ss.com.homework
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.ViewGroup
+import android.view.Gravity
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -28,9 +28,12 @@ class ChatRoomActivity : AppCompatActivity() {
             val toAddMsg = TextView(this)
             toAddMsg.text = msg
             toAddMsg.setTextAppearance(R.style.InputedMessage)
-            val params=LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT)
-            toAddMsg.layoutParams =params
-            contentView.addView(toAddMsg,params)
+            val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            toAddMsg.layoutParams = params
+            contentView.addView(toAddMsg, params)
+            toAddMsg.setPadding(messageView.paddingLeft, messageView.paddingTop, messageView.paddingRight, messageView.paddingBottom)
+            toAddMsg.textSize = 14F
+            toAddMsg.gravity = Gravity.RIGHT
             msg.clear()
         }
     }

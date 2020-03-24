@@ -96,6 +96,11 @@ public class Exercises1 extends AppCompatActivity {
 
     public void resetLifecycleDisplay(View view) {
         mLifecycleDisplay.setText("Lifecycle callbacks:\n");
+        lifeCycleList.clear();
+        if (globalVar.get(TAG) == null)
+            globalVar.put(TAG, lifeCycleList);
+        else
+            globalVar.replace(TAG, lifeCycleList);
     }
 
     public void back(View v) {
