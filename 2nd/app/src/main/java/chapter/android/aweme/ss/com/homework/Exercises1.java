@@ -68,8 +68,8 @@ public class Exercises1 extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         logAndAppend(ON_RESUME);
-        resetLifecycleDisplay(null);
-        lifeCycleList.forEach(item->mLifecycleDisplay.append(item));
+        mLifecycleDisplay.setText("Lifecycle callbacks:\n");
+        lifeCycleList.forEach(item -> mLifecycleDisplay.append(item));
     }
 
     @Override
