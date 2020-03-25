@@ -1,11 +1,11 @@
 package chapter.android.aweme.ss.com.homework;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,15 +39,20 @@ public class Exercises1 extends AppCompatActivity {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exer1);
         mLifecycleDisplay = findViewById(R.id.tv_loglifecycle);
-        globalVar= ((MainApplication) getApplication()).getGlobalVar();
-        if (globalVar.get(TAG) == null) {
+        globalVar = ((MainApplication) getApplication()).getGlobalVar();
+        Object gLifecycleDisplay = globalVar.get(TAG);
+        if (gLifecycleDisplay == null) {
             lifeCycleList = new ArrayList<String>();
         } else {
-            lifeCycleList = (List<String>) globalVar.get(TAG);
+            if (gLifecycleDisplay instanceof List<?>)
+                lifeCycleList = (List<String>) gLifecycleDisplay;
+            else
+                lifeCycleList = new ArrayList<String>();
         }
         logAndAppend(ON_CREATE);
     }
@@ -86,7 +91,7 @@ public class Exercises1 extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if(globalVar.get(TAG)==null)
+        if (globalVar.get(TAG) == null)
             globalVar.put(TAG, lifeCycleList);
         else
             globalVar.replace(TAG, lifeCycleList);
