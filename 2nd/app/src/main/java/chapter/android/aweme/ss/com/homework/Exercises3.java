@@ -53,7 +53,7 @@ public class Exercises3 extends AppCompatActivity {
         List<Message> messages = null;
         try {
             InputStream assetInput = getAssets().open("data.xml");
-            messages = PullParser.pull2xml(assetInput);
+            messages = PullParser.INSTANCE.pull2xml(assetInput);
             if (messages == null)
                 messages= new ArrayList<Message>();
         } catch (Exception exception) {
