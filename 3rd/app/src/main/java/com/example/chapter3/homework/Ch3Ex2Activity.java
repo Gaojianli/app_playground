@@ -6,16 +6,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
-import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
 public class Ch3Ex2Activity extends AppCompatActivity {
 
@@ -39,12 +36,7 @@ public class Ch3Ex2Activity extends AppCompatActivity {
             ColorPicker picker = new ColorPicker(Ch3Ex2Activity.this);
             picker.setColor(getBackgroundColor(startColorPicker));
             picker.enableAutoClose();
-            picker.setCallback(new ColorPickerCallback() {
-                @Override
-                public void onColorChosen(int color) {
-                    onStartColorChanged(color);
-                }
-            });
+            picker.setCallback(this::onStartColorChanged);
             picker.show();
         });
 
@@ -52,24 +44,14 @@ public class Ch3Ex2Activity extends AppCompatActivity {
             ColorPicker picker = new ColorPicker(Ch3Ex2Activity.this);
             picker.setColor(getBackgroundColor(endColorPicker));
             picker.enableAutoClose();
-            picker.setCallback(new ColorPickerCallback() {
-                @Override
-                public void onColorChosen(int color) {
-                    onEndColorChanged(color);
-                }
-            });
+            picker.setCallback(this::onEndColorChanged);
             picker.show();
         });
 
         durationSelector.setText(String.valueOf(1000));
         durationSelector.setOnClickListener(v -> new MaterialDialog.Builder(Ch3Ex2Activity.this)
                 .inputType(InputType.TYPE_CLASS_NUMBER)
-                .input(getString(R.string.duration_hint), durationSelector.getText(), new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        onDurationChanged(input.toString());
-                    }
-                })
+                .input(getString(R.string.duration_hint), durationSelector.getText(), (dialog, input) -> onDurationChanged(input.toString()))
                 .show());
         resetTargetAnimation();
     }
@@ -113,25 +95,25 @@ public class Ch3Ex2Activity extends AppCompatActivity {
     private void resetTargetAnimation() {
         if (animatorSet != null) {
             animatorSet.cancel();
+            animatorSet = null;
         }
-
-        // 在这里实现了一个 ObjectAnimator，对 target 控件的背景色进行修改
-        // 可以思考下，这里为什么要使用 ofArgb，而不是 ofInt 呢？
-        ObjectAnimator animator1 = ObjectAnimator.ofArgb(target,
-                "backgroundColor",
-                getBackgroundColor(startColorPicker),
-                getBackgroundColor(endColorPicker));
-        animator1.setDuration(Integer.parseInt(durationSelector.getText().toString()));
-        animator1.setRepeatCount(ObjectAnimator.INFINITE);
-        animator1.setRepeatMode(ObjectAnimator.REVERSE);
-
-        // TODO ex2-1：在这里实现另一个 ObjectAnimator，对 target 控件的大小进行缩放，从 1 到 2 循环
-
-        // TODO ex2-2：在这里实现另一个 ObjectAnimator，对 target 控件的透明度进行修改，从 1 到 0.5f 循环
-
-        // TODO ex2-3: 将上面创建的其他 ObjectAnimator 都添加到 AnimatorSet 中
+        int duration = Integer.parseInt(durationSelector.getText().toString());
+        ObjectAnimator animatorColor = ObjectAnimator.ofArgb(target, "backgroundColor", getBackgroundColor(startColorPicker), getBackgroundColor(endColorPicker));
+        ObjectAnimator animatorScaleX = ObjectAnimator.ofFloat(target, "scaleX", 1f, 2f);
+        ObjectAnimator animatorScaleY = ObjectAnimator.ofFloat(target, "scaleY", 1f, 2f);
+        ObjectAnimator animatorAlpha = ObjectAnimator.ofFloat(target, "alpha", 1f, 0.5f);
+        animatorInit(animatorColor, duration);
+        animatorInit(animatorScaleX, duration);
+        animatorInit(animatorScaleY, duration);
+        animatorInit(animatorAlpha, duration);
         animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animator1);
+        animatorSet.playTogether(animatorColor, animatorScaleX, animatorScaleY, animatorAlpha);
         animatorSet.start();
+    }
+
+    private void animatorInit(ObjectAnimator animator, int duration) {
+        animator.setDuration(duration);
+        animator.setRepeatCount(ObjectAnimator.INFINITE);
+        animator.setRepeatMode(ObjectAnimator.REVERSE);
     }
 }
