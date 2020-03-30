@@ -2,7 +2,6 @@ package com.example.chapter3.homework
 
 import android.animation.Animator
 import android.animation.AnimatorInflater
-import android.animation.AnimatorSet
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -35,13 +34,11 @@ class PlaceholderFragment : Fragment() {
             val fadeOutAnimator = AnimatorInflater.loadAnimator(context, R.animator.fade_out)
             val fadeInAnimator = AnimatorInflater.loadAnimator(context, R.animator.fade_in)
             fadeOutAnimator.setTarget(loadingView)
-            loadingView?.visibility = View.VISIBLE
             fadeInAnimator.setTarget(friendListView)
-            val aniSet = AnimatorSet()
-            aniSet.playTogether(fadeInAnimator, fadeOutAnimator)
-            aniSet.addListener(object : Animator.AnimatorListener {
+            fadeOutAnimator.addListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator?) {}
                 override fun onAnimationEnd(animation: Animator?) {
+                    fadeInAnimator.start()
                     val container = (loadingView?.parent as ViewGroup)
                     container.removeView(loadingView)
                 }
@@ -49,7 +46,21 @@ class PlaceholderFragment : Fragment() {
                 override fun onAnimationCancel(animation: Animator?) {}
                 override fun onAnimationRepeat(animation: Animator?) {}
             })
-            aniSet.start()
+            fadeOutAnimator.start()
+            //为了避免闪烁，这里不能用group
+//            val aniSet = AnimatorSet()
+//            aniSet.playTogether(fadeOutAnimator, fadeInAnimator)
+//            aniSet.addListener(object : Animator.AnimatorListener {
+//                override fun onAnimationStart(animation: Animator?) {}
+//                override fun onAnimationEnd(animation: Animator?) {
+////                  container.removeView(loadingView)
+//                    fadeInAnimator.start()
+//                }
+//
+//                override fun onAnimationCancel(animation: Animator?) {}
+//                override fun onAnimationRepeat(animation: Animator?) {}
+//            })
+//            aniSet.start()
         }, 5000)
     }
 }
