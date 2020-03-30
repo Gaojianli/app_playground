@@ -19,3 +19,4 @@ class Message {
         return "Message{isOfficial=$isOfficial, title='$title', time='$time', description='$description', icon='$icon'}"
     }
 }
+
