@@ -8,3 +8,4 @@ local.properties
 *.classpath
 *.settings/
 /captures
+/app/release/
