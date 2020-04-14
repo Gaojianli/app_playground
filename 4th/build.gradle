@@ -1,10 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext {
-        key_pass = 'lazybones+each'
-        key_path = 'C:\\Users\\71971\\.ssh\\android_signed.jks'
-    }
     repositories {
 //        google()
 //        jcenter()
