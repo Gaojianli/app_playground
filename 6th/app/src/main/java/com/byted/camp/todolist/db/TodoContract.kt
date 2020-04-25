@@ -22,5 +22,6 @@ object TodoContract {
         const val COLUMN_NAME_DATE = "date"
         const val COLUMN_NAME_STATE = "state"
         const val COLUMN_NAME_CONTENT = "content"
+        const val COLUMN_NAME_PRIORITY = "priority"
     }
 }
