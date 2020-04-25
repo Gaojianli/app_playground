@@ -71,21 +71,18 @@ public class DebugActivity extends AppCompatActivity {
 
         final Button fileWriteBtn = findViewById(R.id.btn_write_files);
         final TextView fileText = findViewById(R.id.text_files);
-        fileWriteBtn.setOnClickListener(v -> {
-            // TODO 把一段文本写入某个存储区的文件中，再读出来，显示在 fileText 上
-            new Thread(() -> {
-                File dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
-                File file = new File(dir, "test");
-                FileUtils.writeContentToFile(file, "#title \ntest content.");
-                final List<String> contents = FileUtils.readContentFromFile(file);
-                DebugActivity.this.runOnUiThread(() -> {
-                    fileText.setText("");
-                    for (String content : contents) {
-                        fileText.append(content + "\n");
-                    }
-                });
-            }).start();
-        });
+        fileWriteBtn.setOnClickListener(v -> new Thread(() -> {
+            File dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+            File file = new File(dir, "test.txt");
+            FileUtils.writeContentToFile(file, "1145141919810");
+            final List<String> contents = FileUtils.readContentFromFile(file);
+            DebugActivity.this.runOnUiThread(() -> {
+                fileText.setText("");
+                for (String content : contents) {
+                    fileText.append(content + "\n");
+                }
+            });
+        }).start());
     }
 
     @Override
