@@ -7,12 +7,13 @@ import java.util.Date;
  *
  * @author xuyingyi@bytedance.com (Yingyi Xu)
  */
-public class Note {
+public class Note implements Comparable<Note> {
 
     public final long id;
     private Date date;
     private State state;
     private String content;
+    private Priority priority;
 
     public Note(long id) {
         this.id = id;
@@ -40,5 +41,29 @@ public class Note {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    @Override
+    public int compareTo(Note o) {
+        return -(this.priority.ordinal() - o.priority.ordinal());
+    }
+
+    public enum Priority {
+        LOWER(0),
+        NORMAL(1),
+        HIGHER(2);
+
+        Priority(int values) {
+        }
+
+
     }
 }

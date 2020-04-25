@@ -44,6 +44,18 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(final Note note) {
         contentText.setText(note.getContent());
+        switch (note.getPriority()) {
+            case NORMAL:
+                itemView.setBackgroundColor(Color.GREEN);
+                break;
+            case HIGHER:
+                itemView.setBackgroundColor(Color.RED);
+                break;
+            case LOWER:
+            default:
+                itemView.setBackgroundColor(Color.WHITE);
+                break;
+        }
         dateText.setText(SIMPLE_DATE_FORMAT.format(note.getDate()));
 
         checkBox.setOnCheckedChangeListener(null);

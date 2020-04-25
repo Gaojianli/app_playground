@@ -9,8 +9,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.byted.camp.todolist.beans.Note
 import com.byted.camp.todolist.db.TodoContract
 import com.byted.camp.todolist.db.TodoDbHelper
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +24,7 @@ class NoteActivity : AppCompatActivity() {
     private var editText: EditText? = null
     private var addBtn: Button? = null
     private var todoDbHelper: TodoDbHelper? = null
+    private var radioGroup: RadioGroup? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
@@ -54,11 +57,22 @@ class NoteActivity : AppCompatActivity() {
                 finish()
             }
         })
+        radioGroup = findViewById(R.id.radioGroup)
+        radioGroup?.setOnCheckedChangeListener { _, _ ->
+            addBtn?.isEnabled = true
+        }
     }
 
     private fun saveNote2Database(content: String): Boolean {
         val toInsert = ContentValues()
         toInsert.put(TodoContract.TodoEntry.COLUMN_NAME_CONTENT, content)
+        val priority = when (radioGroup?.checkedRadioButtonId) {
+            R.id.radioHighButton -> Note.Priority.HIGHER
+            R.id.radioLowButton -> Note.Priority.LOWER
+            R.id.radioNormalButton -> Note.Priority.NORMAL
+            else -> Note.Priority.NORMAL
+        }
+        toInsert.put(TodoContract.TodoEntry.COLUMN_NAME_PRIORITY, priority.ordinal)
         return try {
             val rowId: Long = todoDbHelper?.writableDatabase?.insertOrThrow(TodoContract.TodoEntry.TABLE_NAME, null, toInsert)!!
             rowId > 0

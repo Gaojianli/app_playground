@@ -16,11 +16,32 @@
             android:padding="4dp"
             android:textColor="#1e1e1e"/>
 
+    <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup">
+        <RadioButton
+                android:text="High"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/radioHighButton"/>
+        <RadioButton
+                android:text="Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/radioNormalButton"/>
+        <RadioButton
+                android:text="Low"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/radioLowButton"/>
+
+    </RadioGroup>
+
     <Button
             android:id="@+id/btn_add"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
+            android:enabled="false"
             android:text="@string/confirm"/>
+
 
 </LinearLayout>

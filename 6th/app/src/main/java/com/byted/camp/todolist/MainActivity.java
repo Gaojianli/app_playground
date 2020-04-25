@@ -125,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
             int time = cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_DATE));
             note.setDate(new Date(time));
             note.setContent(cursor.getString(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_CONTENT)));
-            note.setState(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_STATE)) == 0 ? State.TODO : State.DONE);
+            note.setState(State.values()[cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_STATE))]);
+            note.setPriority(Note.Priority.values()[cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_PRIORITY))]);
             noteList.add(note);
         }
         return noteList;
