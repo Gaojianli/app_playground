@@ -26,7 +26,7 @@ public class TodoDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (newVersion > oldVersion)
-            db.execSQL("alter table " + TodoContract.TodoEntry.TABLE_NAME + " ADD " + TodoContract.TodoEntry.COLUMN_NAME_PRIORITY + " TEXT default 0");
+            db.execSQL("alter table " + TodoContract.TodoEntry.TABLE_NAME + " ADD " + TodoContract.TodoEntry.COLUMN_NAME_PRIORITY + " INTEGER default 0");
     }
 
 }
