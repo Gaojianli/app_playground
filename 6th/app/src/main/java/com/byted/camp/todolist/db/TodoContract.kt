@@ -12,7 +12,8 @@ object TodoContract {
             "${TodoEntry.COLUMN_NAME_ID} INTEGER primary key autoincrement," +
             "${TodoEntry.COLUMN_NAME_DATE} datetime default (datetime('now', 'localtime'))," +
             "${TodoEntry.COLUMN_NAME_STATE} INTEGER default 0," +
-            "${TodoEntry.COLUMN_NAME_CONTENT} TEXT" +
+            "${TodoEntry.COLUMN_NAME_CONTENT} TEXT," +
+            "${TodoEntry.COLUMN_NAME_PRIORITY} INTEGER default 0" +
             ")"
     const val SQL_DELETE_ENTRIES = "drop table if exists ${TodoEntry.TABLE_NAME}"
 
