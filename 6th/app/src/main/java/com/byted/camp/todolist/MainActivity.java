@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.rawQuery("select * from " + TodoContract.TodoEntry.TABLE_NAME, null);
         ArrayList<Note> noteList = new ArrayList<>();
         while (cursor.moveToNext()) {
-<<<<<<< HEAD
             try{
                 Note note = new Note(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_ID)));
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -132,16 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 continue;
             }
-=======
-            Note note = new Note(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_ID)));
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            int time = cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_DATE));
-            note.setDate(new Date(time));
-            note.setContent(cursor.getString(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_CONTENT)));
-            note.setState(State.values()[cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_STATE))]);
-            note.setPriority(Note.Priority.values()[cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_PRIORITY))]);
-            noteList.add(note);
->>>>>>> Finish pro version
         }
         cursor.close();
         return noteList;
