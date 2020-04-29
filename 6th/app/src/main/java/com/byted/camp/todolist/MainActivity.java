@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.byted.camp.todolist.beans.Note;
 import com.byted.camp.todolist.beans.State;
 import com.byted.camp.todolist.db.TodoContract;
@@ -119,15 +121,16 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.rawQuery("select * from " + TodoContract.TodoEntry.TABLE_NAME, null);
         ArrayList<Note> noteList = new ArrayList<>();
         while (cursor.moveToNext()) {
-            try{
+            try {
                 Note note = new Note(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_ID)));
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                String time=cursor.getString(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_DATE));
+                String time = cursor.getString(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_DATE));
                 note.setDate(format.parse(time));
                 note.setContent(cursor.getString(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_CONTENT)));
                 note.setState(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_STATE)) == 0 ? State.TODO : State.DONE);
+                note.setPriority(Note.Priority.values()[cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_PRIORITY))]);
                 noteList.add(note);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 continue;
             }
