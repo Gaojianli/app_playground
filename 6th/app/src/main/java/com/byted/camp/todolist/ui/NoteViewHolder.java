@@ -20,7 +20,8 @@ import java.util.Locale;
  *
  * @author xuyingyi@bytedance.com (Yingyi Xu)
  */
-public class NoteViewHolder extends RecyclerView.ViewHolder {
+public class
+NoteViewHolder extends RecyclerView.ViewHolder {
 
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT =
             new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.ENGLISH);

@@ -10,7 +10,7 @@ import android.provider.BaseColumns
 object TodoContract {
     const val SQL_CREATE_ENTRIES = "create table ${TodoEntry.TABLE_NAME}(" +
             "${TodoEntry.COLUMN_NAME_ID} INTEGER primary key autoincrement," +
-            "${TodoEntry.COLUMN_NAME_DATE} datetime default (datetime('now', 'localtime'))," +
+            "${TodoEntry.COLUMN_NAME_DATE} timestamp default (datetime('now', 'localtime'))," +
             "${TodoEntry.COLUMN_NAME_STATE} INTEGER default 0," +
             "${TodoEntry.COLUMN_NAME_CONTENT} TEXT" +
             ")"

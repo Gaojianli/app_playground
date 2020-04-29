@@ -27,7 +27,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -120,14 +119,20 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.rawQuery("select * from " + TodoContract.TodoEntry.TABLE_NAME, null);
         ArrayList<Note> noteList = new ArrayList<>();
         while (cursor.moveToNext()) {
-            Note note = new Note(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_ID)));
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            int time = cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_DATE));
-            note.setDate(new Date(time));
-            note.setContent(cursor.getString(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_CONTENT)));
-            note.setState(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_STATE)) == 0 ? State.TODO : State.DONE);
-            noteList.add(note);
+            try{
+                Note note = new Note(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_ID)));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                String time=cursor.getString(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_DATE));
+                note.setDate(format.parse(time));
+                note.setContent(cursor.getString(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_CONTENT)));
+                note.setState(cursor.getInt(cursor.getColumnIndex(TodoContract.TodoEntry.COLUMN_NAME_STATE)) == 0 ? State.TODO : State.DONE);
+                noteList.add(note);
+            }catch (Exception e){
+                e.printStackTrace();
+                continue;
+            }
         }
+        cursor.close();
         return noteList;
     }
 
