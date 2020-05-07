@@ -1,4 +1,4 @@
-package chapter.android.aweme.ss.com.homework.widget;
+package me.gaojianli.yetanothertiktok.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
